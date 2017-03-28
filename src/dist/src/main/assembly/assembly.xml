@@ -1,0 +1,45 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/2.3"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/2.3 http://maven.apache.org/xsd/assembly-2.3.xsd">
+  <id>contact-manager-assembly</id>
+  
+  <formats>
+    <format>zip</format>
+  </formats>
+  
+  <includeBaseDirectory>false</includeBaseDirectory>
+
+  <moduleSets>
+    <moduleSet>
+      <useAllReactorProjects>true</useAllReactorProjects>
+      <includes>
+         <include>tst.contactmngr:web:war:${project.version}</include>
+      </includes>
+      <binaries>
+        <outputDirectory>contact-manager-${project.version}/webapps/contactmngr</outputDirectory>
+        <includeDependencies>false</includeDependencies>
+        <unpack>true</unpack>
+      </binaries>
+    </moduleSet>
+  </moduleSets>
+  
+  <dependencySets>
+    <dependencySet>
+      <outputDirectory>contact-manager-${project.version}/lib</outputDirectory>
+      <includes>
+         <include>com.h2database:h2:jar</include>
+      </includes>
+    </dependencySet>
+  </dependencySets>
+  
+  <fileSets>
+    <fileSet>
+      <directory>${basedir}/src/main/resources/</directory>
+      <outputDirectory>contact-manager-${project.version}</outputDirectory>
+      <includes>
+        <include>*.txt</include>
+      </includes>
+      <lineEnding>unix</lineEnding>
+    </fileSet>
+  </fileSets>
+</assembly>
